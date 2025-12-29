@@ -94,6 +94,7 @@
     <Compile Include="Controller.cs" />
     <Compile Include="DatasetLoader.cs" />
     <Compile Include="FeatureExtractors.cs" />
+    <Compile Include="ImageUtils.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

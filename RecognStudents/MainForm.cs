@@ -37,8 +37,6 @@ namespace AForge.WindowsForms
                 cfg.Mode = FeatureMode.Zoning;
 
             cfg.ZoningGrid = (int)numZoningGrid.Value;
-            cfg.Padding = 4;
-
             return cfg;
         }
 
@@ -80,7 +78,6 @@ namespace AForge.WindowsForms
         {
             InitializeComponent();
 
-            // важно, чтобы KeyDown ловился
             this.KeyPreview = true;
 
             originalImageBox.SizeMode = PictureBoxSizeMode.Zoom;
@@ -207,7 +204,6 @@ namespace AForge.WindowsForms
             controller.settings.processImg = checkBox1.Checked;
         }
 
-        // === ВАЖНО: Designer у тебя подписан на этот метод ===
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -220,8 +216,6 @@ namespace AForge.WindowsForms
                 case Keys.E: controller.settings.border--; break;
             }
         }
-
-        // ====== UI сети ======
 
         private void cmbFeatureMode_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -245,7 +239,6 @@ namespace AForge.WindowsForms
 
         private async void btnTrain_Click(object sender, EventArgs e)
         {
-            // FIX: теперь FindDatasetFolder требует maxUp
             string folder = DatasetLoader.FindDatasetFolder("output_images", 6);
 
             FeatureConfig cfg = CurrentFeatureConfig();
@@ -256,7 +249,6 @@ namespace AForge.WindowsForms
             double acceptableError = (100 - trkAccuracy.Value) / 100.0;
             bool parallel = chkParallel.Checked;
 
-            // FIX: TrainFromFolderAsync требует trainPart
             double trainPart = 0.8;
 
             try
@@ -267,7 +259,6 @@ namespace AForge.WindowsForms
                 Tuple<double, double> result = await controller.TrainFromFolderAsync(
                     folder, cfg, netType, hidden, epochs, acceptableError, parallel, trainPart);
 
-                // FIX: это Tuple -> Item1/Item2
                 double err = result.Item1;
                 double acc = result.Item2;
 

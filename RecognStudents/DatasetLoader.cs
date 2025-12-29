@@ -16,7 +16,7 @@ namespace AForge.WindowsForms
             SamplesSet set = new SamplesSet();
 
             string[] files = Directory.GetFiles(folder)
-                .Where(f =>{
+                .Where(f => {
                     string ext = Path.GetExtension(f).ToLowerInvariant();
                     return ext == ".png" || ext == ".jpg" || ext == ".jpeg" || ext == ".bmp";
                 })
